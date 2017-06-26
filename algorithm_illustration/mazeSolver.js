@@ -5,22 +5,61 @@ Origin is top right.
 Change the maze for test cases.
 */
 
+/*
+6/27/2017: update
+- Added a UI to customize the maze
+*/
+
+
+var container = document.getElementById("container");
+var	maze = [
+	[1, 0, 1, 0, 0, 0, 0, 1, 1, 1],
+	[1, 0, 1, 0, 0, 0, 0, 1, 0, 0],
+	[1, 0, 1, 0, 0, 0, 0, 1, 0, 1],
+	[1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+	[1, 0, 1, 0, 0, 0, 0, 0, 1, 0],
+	[1, 0, 1, 0, 0, 0, 0, 0, 1, 0],
+	[0, 0, 1, 0, 0, 0, 0, 0, 1, 0],
+	[0, 0, 1, 0, 0, 0, 1, 1, 1, 1],
+	[1, 1, 1, 0, 0, 0, 0, 0, 1, 0],
+	[0, 0, 1, 0, 0, 0, 0, 0, 1, 1],
+	];
+var square = [];
+
+// interface to customize the maze
+for (let i = 0; i < 10; i++) {
+	square.push([]);
+	for (let j = 0; j < 10; j++) {
+		// draw interface
+		square[i].push(document.createElement("div"));
+		square[i][j].className = "row-10";
+		if (maze[i][j]==0) {
+			square[i][j].style.background = "white";
+		}
+		else {
+			square[i][j].style.background  = "black";
+		}
+		// interact - mouse click
+		square[i][j].addEventListener(
+		"click",
+		function() {
+			if (maze[i][j]==0) {
+				maze[i][j] = 1;
+				square[i][j].style.background = "black";
+			}
+			else {
+				maze[i][j] = 0;
+				square[i][j].style.background  = "white";
+			}
+		}
+		)
+		container.appendChild(square[i][j]);
+	}
+}
 
 window.onload = function() {
 	canvas = document.getElementById("canvas");
 	context = canvas.getContext("2d");
-	maze = [
-		[1, 0, 1, 0, 0, 0, 0, 1, 1, 1],
-		[1, 0, 1, 0, 0, 0, 0, 1, 0, 0],
-		[1, 0, 1, 0, 0, 0, 0, 1, 0, 1],
-		[1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-		[1, 0, 1, 0, 0, 0, 0, 0, 1, 0],
-		[1, 0, 1, 0, 0, 0, 0, 0, 1, 0],
-		[0, 0, 1, 0, 0, 0, 0, 0, 1, 0],
-		[0, 0, 1, 0, 0, 0, 1, 1, 1, 1],
-		[1, 1, 1, 0, 0, 0, 0, 0, 1, 0],
-		[0, 0, 1, 0, 0, 0, 0, 0, 1, 1],
-	];
 	x = 0, y = 0;
 	vx = 1; vy = 0; // velocity
 	path = ''; // ignore this for now
