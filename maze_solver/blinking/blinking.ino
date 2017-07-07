@@ -27,13 +27,11 @@ void dWrite(int pin, int value) {
 
 void setup() {
   // put your setup code here, to run once:
-  setPin(13, 1);
+  setPin(13, IN);
+  Serial.begin(9600);
 }
 
 void loop() {
   // put your main code here, to run repeatedly:
-  dWrite(13, 1);
-  delay(1000);
-  dWrite(13, 0);
-  delay(1000);
+Serial.println(digitalRead(13));
 }
